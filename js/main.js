@@ -3,7 +3,7 @@
 async function checkIfLive(channel) {
   try {
     const stream = await fetch(
-      `https://wind-bow.gomix.me/twitch-api/streams/${channel}`
+      `https://cors-anywhere.herokuapp.com/https://wind-bow.gomix.me/twitch-api/streams/${channel}`
     );
     const response = await stream.json();
     return response.stream;
@@ -15,7 +15,7 @@ async function checkIfLive(channel) {
 async function getChannelInfo(channel) {
   try {
     const stream = await fetch(
-      `https://wind-bow.gomix.me/twitch-api/channels/${channel}`
+      `https://cors-anywhere.herokuapp.com/https://wind-bow.gomix.me/twitch-api/channels/${channel}`
     );
     const response = await stream.json();
     return response;
