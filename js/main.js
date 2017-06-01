@@ -26,13 +26,11 @@ async function getChannelInfo(channel) {
 
 function generateStreamHtml(status, channel) {
   const streamsContainer = document.getElementById('streams-container');
-  const logo =
-    channel.logo ||
-    'https://seeklogo.com/images/T/twitch-tv-logo-51C922E0F0-seeklogo.com.gif';
+  const logo = channel.logo || './img/twitch_logo.png';
   if (channel.hasOwnProperty('error')) {
     streamsContainer.innerHTML += `
     <div class="twelve columns value pt-5">
-      <img class="value-img logo-img" src="">
+      <img class="value-img logo-img" src="./img/error_stream.png">
       <h2 class="value-multiplier"></h2>
       <p class="value-description">${channel.error}: ${channel.message}</p>
     </div>
