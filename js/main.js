@@ -32,7 +32,7 @@ function generateStreamHtml(status, channel) {
   if (channel.hasOwnProperty('error')) {
     streamsContainer.innerHTML += `
     <div class="twelve columns value pt-5">
-      <img class="value-img logo-img" src="">
+      <img class="value-img logo-img" src="https://github.com/JazzBrotha/fcc-twitch-streams/blob/master/img/error_stream.png">
       <h2 class="value-multiplier"></h2>
       <p class="value-description">${channel.error}: ${channel.message}</p>
     </div>
