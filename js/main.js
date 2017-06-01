@@ -3,7 +3,7 @@
 async function checkIfLive(channel) {
   try {
     const stream = await fetch(
-      `https://wind-bow.gomix.me/twitch-api/streams/${channel}`
+      `https://cors-anywhere.herokuapp.com/https://wind-bow.gomix.me/twitch-api/streams/${channel}`
     );
     const response = await stream.json();
     return response.stream;
@@ -15,7 +15,7 @@ async function checkIfLive(channel) {
 async function getChannelInfo(channel) {
   try {
     const stream = await fetch(
-      `https://wind-bow.gomix.me/twitch-api/channels/${channel}`
+      `https://cors-anywhere.herokuapp.com/https://wind-bow.gomix.me/twitch-api/channels/${channel}`
     );
     const response = await stream.json();
     return response;
@@ -29,7 +29,15 @@ function generateStreamHtml(status, channel) {
   const logo =
     channel.logo ||
     'https://seeklogo.com/images/T/twitch-tv-logo-51C922E0F0-seeklogo.com.gif';
-  if (status !== null) {
+  if (channel.hasOwnProperty('error')) {
+    streamsContainer.innerHTML += `
+    <div class="twelve columns value pt-5">
+      <img class="value-img logo-img" src="">
+      <h2 class="value-multiplier"></h2>
+      <p class="value-description">${channel.error}: ${channel.message}</p>
+    </div>
+    `;
+  } else if (status !== null) {
     streamsContainer.innerHTML += `
     <div class="twelve columns value pt-5">
       <img class="value-img logo-img" src="${logo}">
@@ -88,7 +96,9 @@ async function getTwitchStreams() {
     'storbeck',
     'habathcx',
     'RobotCaleb',
-    'noobs2ninjas'
+    'noobs2ninjas',
+    'brunofin',
+    'comster404'
   ];
   for (const channel of channels) {
     const [status, channelInfo] = await Promise.all([
